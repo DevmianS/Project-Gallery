@@ -55,17 +55,41 @@ main .project {
   z-index: 1;
   border-radius: var(--bradius);
   overflow: hidden;
-  -webkit-box-shadow: 0px 0px 8px 0px #000000;
-          box-shadow: 0px 0px 8px 0px #000000;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+main .project:hover {
+  -webkit-transform: scale(110%);
+          transform: scale(110%);
+  -webkit-box-shadow: 0px 0px 70px 0px #000000;
+          box-shadow: 0px 0px 70px 0px #000000;
 }
 
 main .project iframe {
   overflow: hidden;
-  z-index: 10;
+  z-index: 9;
   position: absolute;
   border-radius: var(--bradius);
   width: 100%;
   height: 100%;
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
+}
+
+main .project .overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0);
+  -webkit-box-shadow: inset 0 0 70px #000000;
+          box-shadow: inset 0 0 70px #000000;
+  z-index: 10;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+main .project .overlay:hover {
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
