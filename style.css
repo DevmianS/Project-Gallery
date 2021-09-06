@@ -55,13 +55,11 @@ main .project {
   z-index: 1;
   border-radius: var(--bradius);
   overflow: hidden;
-  scrollbar-width: none;
   -webkit-box-shadow: 0px 0px 8px 0px #000000;
           box-shadow: 0px 0px 8px 0px #000000;
 }
 
 main .project iframe {
-  scrollbar-width: none;
   overflow: hidden;
   z-index: 10;
   position: absolute;
