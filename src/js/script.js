@@ -3,9 +3,7 @@ let getIframeId = [0,];
 let getIframe = document.querySelector('iframe');
 let checkIfClicked = 0;
 let getOverlay = document.querySelectorAll('.overlay');
-
 let addToolbar = document.createElement('div')
-
 
 
 function setAttributes(el, attrs) {
@@ -13,51 +11,55 @@ function setAttributes(el, attrs) {
       el.setAttribute(key, attrs[key]);
     }
 }
+function hideToolbar(val){
+    getProjectElem[val].style.removeProperty('width');
+    getProjectElem[val].style.removeProperty('height');
+    getProjectElem[val].style.removeProperty('z-index');
+    getProjectElem[val].style.removeProperty('position');
+    document.getElementById('iframe-'+val).setAttribute('scrolling', 'no');
+    getProjectElem[val].querySelector('.overlay').style.removeProperty('position');
+    getProjectElem[val].querySelector('.overlay').style.removeProperty('z-index');
+}
+
 
 function addElements(val){
     document.getElementById('project-'+val).appendChild(addToolbar);
-    addToolbar.classList.add('toolbar');
-    console.log(addToolbar)
+    addToolbar.setAttribute('id', 'toolbar');
+    let getToolbar = document.getElementById('toolbar');
+    getToolbar.appendChild(document.createElement('img'));
+    getToolbar.querySelector('img').setAttribute('id','xbutton');
+    getToolbar.querySelector('img').src = "media/icon-close.svg";
+    getToolbar.querySelector('#xbutton').addEventListener('click',function(){hideToolbar(val)})
+
+
+    // let text = document.createTextNode('X');
+    // document.getElementById('xbutton').appendChild(text);
     
     //  let text = document.createTextNode('X');
     //  addToolbar.appendChild(text);
 }
 
-let maximize = (value) => {
+let maximize = (val) => {
     
     if(checkIfClicked == false){
-        getProjectElem[value].style.width = '80vw';
-        getProjectElem[value].style.height = '80vh';
-        getProjectElem[value].style.position = 'fixed';
-        getProjectElem[value].style.zIndex = '6';
-        document.getElementById('iframe-'+value).setAttribute('scrolling', 'yes');
+        getProjectElem[val].style.width = '90vw';
+        getProjectElem[val].style.height = '90vh';
+        getProjectElem[val].style.position = 'fixed';
+        getProjectElem[val].style.zIndex = '6';
+        document.getElementById('iframe-'+val).setAttribute('scrolling', 'yes');
         // document.querySelectorAll('.overlay')[value-1].style.zIndex='1';
-        getProjectElem[value].querySelector('.overlay').style.zIndex='1';
+        getProjectElem[val].querySelector('.overlay').style.zIndex='1';
 
-        addElements(value);
-       
+        addElements(val);
+        
         // document.querySelector('.finished').addEventListener('click', function(){
         //    maximize();
         // })
         checkIfClicked = true;
 
     }
-    else if(checkIfClicked == true){
-        getProjectElem[value].style.removeProperty('width');
-        getProjectElem[value].style.removeProperty('height');
-        getProjectElem[value].style.removeProperty('z-index');
-        getProjectElem[value].style.removeProperty('position');
-        document.getElementById('iframe-'+value).setAttribute('scrolling', 'no');
-        getProjectElem[value].querySelector('.overlay').style.removeProperty('position');
-        getProjectElem[value].querySelector('.overlay').style.removeProperty('z-index');
-       
-        
-
-
-        
-        // document.querySelector('body').removeEventListener('click', function(){
-
-        // });
+    else{
+        document.getElementById('toolbar').remove();
         checkIfClicked = false;
     }
     //setAttributes(getProjectElem[1], )
