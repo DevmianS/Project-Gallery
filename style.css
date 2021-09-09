@@ -108,7 +108,7 @@ main .project #toolbar {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 150px;
+  width: 200px;
   height: 40px;
   z-index: 10;
   top: -30px;
@@ -123,6 +123,12 @@ main .project #toolbar {
           box-shadow: inset 0 0 10px #0000000c;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 765px) {
+  main .project #toolbar {
+    width: 30%;
+  }
 }
 
 main .project #toolbar:hover {
