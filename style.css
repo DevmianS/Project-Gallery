@@ -1,6 +1,7 @@
 :root {
   --bradius: 15px;
   --bradius2: 16px;
+  --scale: 105%;
 }
 
 body {
@@ -55,23 +56,20 @@ main .project {
   width: 400px;
   height: 800px;
   z-index: 1;
-  border-radius: var(--bradius);
+  border-radius: 14px;
   overflow: hidden;
-  -webkit-box-shadow: inset 0 0 50px #000000;
-          box-shadow: inset 0 0 50px #000000;
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
 }
 
 main .project:hover {
-  -webkit-transform: scale(105%);
-          transform: scale(105%);
+  -webkit-transform: scale(var(--scale));
+          transform: scale(var(--scale));
   -webkit-box-shadow: 0px 0px 70px 0px #000000;
           box-shadow: 0px 0px 70px 0px #000000;
 }
 
 main .project iframe {
-  overflow: hidden;
   z-index: 3;
   position: absolute;
   border-radius: var(--bradius);
@@ -85,8 +83,9 @@ main .project .overlay {
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-box-shadow: inset 0 0 50px #000000;
-          box-shadow: inset 0 0 50px #000000;
+  -webkit-box-shadow: inset 0px 0 50px #000000;
+          box-shadow: inset 0px 0 50px #000000;
+  border-radius: 13px;
   z-index: 4;
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
@@ -111,13 +110,15 @@ main .project #toolbar {
   width: 200px;
   height: 40px;
   z-index: 10;
-  top: -30px;
+  top: -5px;
   left: 0;
   right: 0;
   margin-right: auto;
   margin-left: auto;
   z-index: 8;
-  background-color: rgba(129, 129, 129, 0.1);
+  border: 1px solid black;
+  background-color: #c3c3c3;
+  opacity: 0.2;
   border-radius: 0 0 var(--bradius) var(--bradius);
   -webkit-box-shadow: inset 0 0 10px #0000000c;
           box-shadow: inset 0 0 10px #0000000c;
@@ -132,10 +133,11 @@ main .project #toolbar {
 }
 
 main .project #toolbar:hover {
-  background-color: #818181;
+  background-color: #c1c1c1;
   -webkit-box-shadow: inset 0 0 10px #0000006c;
           box-shadow: inset 0 0 10px #0000006c;
   top: -5px;
+  opacity: 1;
 }
 
 main .project #toolbar #xbutton {
@@ -143,6 +145,7 @@ main .project #toolbar #xbutton {
   height: 60%;
   -webkit-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
+  cursor: pointer;
 }
 
 main .project #toolbar #xbutton:hover {
