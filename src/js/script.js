@@ -1,8 +1,9 @@
-let getProject = [0,];
-let getIframeId = [0,];
-const getIframe = document.querySelector('iframe');
+// let getProject = [0,];
+// let getIframeId = [0,];
+const getIframe = document.querySelectorAll('iframe');
 let checkIfClicked = 0;
 const getOverlay = document.querySelectorAll('.overlay');
+const getProjectClass = document.querySelectorAll('.project');
 const addToolbar = document.createElement('div')
 const root = document.documentElement;
 
@@ -11,56 +12,52 @@ function setAttributes(el, attrs) {
       el.setAttribute(key, attrs[key]);
     }
 }
-function hideToolbar(val){
-    getProject[val].style.removeProperty('width');
-    getProject[val].style.removeProperty('height');
-    getProject[val].style.removeProperty('z-index');
-    getProject[val].style.removeProperty('position');
-    document.getElementById('iframe-'+val).setAttribute('scrolling', 'no');
-    getProject[val].querySelector('.overlay').style.removeProperty('position');
-    getProject[val].querySelector('.overlay').style.removeProperty('z-index');
+
+function indexInClass(collection, node) {
+    for (var i = 0; i < collection.length; i++) {
+      if (collection[i] === node)
+        return i;
+    }
+    return -1;
+}
+
+function hideToolbar(pElem,elIndex){
+    pElem.style.removeProperty('width');
+    pElem.style.removeProperty('height');
+    pElem.style.removeProperty('z-index');
+    pElem.style.removeProperty('position');
+    getIframe[elIndex].setAttribute('scrolling', 'no');//todo fix!
+    pElem.querySelector('.overlay').style.removeProperty('position');
+    pElem.querySelector('.overlay').style.removeProperty('z-index');
     if (document.getElementById('toolbar'))
     document.getElementById('toolbar').remove();
 }
 
 
-function addElements(val){
-    document.getElementById('project-'+val).appendChild(addToolbar);
+function addElements(pElem,elIndex){
+    pElem.appendChild(addToolbar);
     addToolbar.setAttribute('id', 'toolbar');
     let getToolbar = document.getElementById('toolbar');
     getToolbar.appendChild(document.createElement('img'));
     getToolbar.querySelector('img').setAttribute('id','xbutton');
     let toolbarXb = getToolbar.querySelector('#xbutton')
     toolbarXb.src = "media/icon-close.svg";
-    toolbarXb.addEventListener('click',function(){hideToolbar(val)})
-
-
-    // let text = document.createTextNode('X');
-    // document.getElementById('xbutton').appendChild(text);
-    
-    //  let text = document.createTextNode('X');
-    //  addToolbar.appendChild(text);
+    toolbarXb.addEventListener('click',function(){hideToolbar(pElem,elIndex)});
 }
 
-let maximize = (val) => {
+let maximize = (pElem,elIndex) => {
     
     if(checkIfClicked == false){
-        getProject[val].style.width = '90vw';
-        getProject[val].style.height = '90vh';
-        getProject[val].style.position = 'fixed';
-        getProject[val].style.zIndex = '6';
-        document.getElementById('iframe-'+val).setAttribute('scrolling', 'yes');
-        // document.querySelectorAll('.overlay')[value-1].style.zIndex='1';
-        getProject[val].querySelector('.overlay').style.zIndex='1';
+        pElem.style.width = '90vw';
+        pElem.style.height = '90vh';
+        pElem.style.position = 'fixed';
+        pElem.style.zIndex = '6';
+        getIframe[elIndex].setAttribute('scrolling', 'yes');
+         //document.querySelectorAll('.overlay')[pElem].style.zIndex='1';
+        pElem.querySelector('.overlay').style.zIndex='1';
         document.querySelector('body').style.overflow = "hidden";
-
         root.style.setProperty('--scale', "100%");
-        addElements(val);
-        
-        // document.querySelector('.finished').addEventListener('click', function(){
-        //    maximize();
-        // })
-        
+        addElements(pElem,elIndex);
         checkIfClicked = true;
 
     }
@@ -69,17 +66,8 @@ let maximize = (val) => {
         document.querySelector('body').style.removeProperty('overflow');
         checkIfClicked = false;
     }
-    //setAttributes(getProject[1], )
 };
 
-for(let i = 1; i<=5; i++){
-    getProject[i] = document.getElementById('project-'+i);
-    getIframeId[i] = document.getElementById('iframe-'+i);
-}
 
-for(let i = 1; i<=4; i++){
-    // console.log(getProject[i])
-    getProject[i].addEventListener('click', function(){maximize(i)});
-}
+getProjectClass.forEach(el =>  el.addEventListener('click', function(){let elIndex = indexInClass(getProjectClass, el) ;maximize(el,elIndex)}));
 
-// console.log(document.querySelectorAll('.overlay')[0]);
