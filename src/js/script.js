@@ -21,14 +21,22 @@ function indexInClass(collection, node) {
     return -1;
 }
 
+function remProps(el){
+    for (let i = 0; i < remProps.arguments.length; i++) {
+        el.style.removeProperty(remProps.arguments[i]);  
+    }
+}
+function setStyles(el){//usage example: setStyles(el, 'width', '100px', 'height', '50px');
+    for (let i = 1; i < setStyles.arguments.length; i+=2) {
+        el.style[setStyles.arguments[i]] = setStyles.arguments[i+1];
+    }
+}
+
 function hideToolbar(pElem,elIndex){
-    pElem.style.removeProperty('width');
-    pElem.style.removeProperty('height');
-    pElem.style.removeProperty('z-index');
-    pElem.style.removeProperty('position');
-    getIframe[elIndex].setAttribute('scrolling', 'no');//todo fix!
-    pElem.querySelector('.overlay').style.removeProperty('position');
-    pElem.querySelector('.overlay').style.removeProperty('z-index');
+    getIframe[elIndex].setAttribute('scrolling', 'no');
+    remProps(pElem, 'width', 'height', 'z-index', 'position');
+    remProps(pElem.querySelector('.overlay'), 'z-index', 'position');
+
     if (document.getElementById('toolbar'))
     document.getElementById('toolbar').remove();
 }
@@ -45,21 +53,23 @@ function addElements(pElem,elIndex){
     toolbarXb.addEventListener('click',function(){hideToolbar(pElem,elIndex)});
 }
 
+
 let maximize = (pElem,elIndex) => {
     
     if(checkIfClicked == false){
-        pElem.style.width = '90vw';
-        pElem.style.height = '90vh';
-        pElem.style.position = 'fixed';
-        pElem.style.zIndex = '6';
-        getIframe[elIndex].setAttribute('scrolling', 'yes');
-         //document.querySelectorAll('.overlay')[pElem].style.zIndex='1';
-        pElem.querySelector('.overlay').style.zIndex='1';
-        document.querySelector('body').style.overflow = "hidden";
-        root.style.setProperty('--scale', "100%");
-        addElements(pElem,elIndex);
-        checkIfClicked = true;
+        setStyles(pElem, 'z-index', '6', 'position', 'fixed');
+        setTimeout(() => {//todo WIP
+            setStyles(pElem, 'width', '90vw', 'height', '90vw'); 
+            getIframe[elIndex].setAttribute('scrolling', 'yes');
+            pElem.querySelector('.overlay').style.zIndex='1';
+            document.querySelector('body').style.overflow = "hidden";
+            root.style.setProperty('--scale', "100%");
+            addElements(pElem,elIndex);
+            checkIfClicked = true;
+        }, 300);
+        
 
+ //document.querySelectorAll('.overlay')[pElem].style.zIndex='1';
     }
     else{
         root.style.setProperty('--scale', "105%");
