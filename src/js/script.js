@@ -1,12 +1,11 @@
-// let getProject = [0,];
-// let getIframeId = [0,];
 const getIframe = document.querySelectorAll('iframe');
 let checkIfClicked = 0;
 const getOverlay = document.querySelectorAll('.overlay');
 const getProjectClass = document.querySelectorAll('.project');
 const addToolbar = document.createElement('div')
 const root = document.documentElement;
-
+// let getTransitionTime = 
+let tTimeParsed = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--transitiontime'),10)*1000;
 function setAttributes(el, attrs) {
     for(var key in attrs) {
       el.setAttribute(key, attrs[key]);
@@ -32,11 +31,24 @@ function setStyles(el){//usage example: setStyles(el, 'width', '100px', 'height'
     }
 }
 
+// function evtListeners(val){
+//     if (val=='add'){
+//         getProjectClass.forEach(el =>  el.addEventListener('click', function(){let elIndex = indexInClass(getProjectClass, el) ;maximize(el,elIndex)}));
+//     }
+//     if (val=='remove') {
+        
+//         getProjectClass.forEach(el =>  el.removeEventListener('click', function(){let elIndex = indexInClass(getProjectClass, el) ;maximize(el,elIndex)}));
+//     }
+// }
+
 function hideToolbar(pElem,elIndex){
     getIframe[elIndex].setAttribute('scrolling', 'no');
-    remProps(pElem, 'width', 'height', 'z-index', 'position');
+    remProps(pElem, 'width', 'height', 'border-radius');
     remProps(pElem.querySelector('.overlay'), 'z-index', 'position');
-
+    setTimeout(() => {
+        remProps(pElem, 'z-index', 'position');
+    }, tTimeParsed);
+    console.log(tTimeParsed)
     if (document.getElementById('toolbar'))
     document.getElementById('toolbar').remove();
 }
@@ -57,16 +69,22 @@ function addElements(pElem,elIndex){
 let maximize = (pElem,elIndex) => {
     
     if(checkIfClicked == false){
-        setStyles(pElem, 'z-index', '6', 'position', 'fixed');
-        setTimeout(() => {//todo WIP
-            setStyles(pElem, 'width', '90vw', 'height', '90vw'); 
+        setStyles(pElem, 'z-index', '999', 'position', 'fixed');
+        
+        // setTimeout(() => {//todo WIP
+            setStyles(pElem, 'width', '90vw', 'height', '90vh','border-radius', '0'); 
+            setStyles(getIframe[elIndex], 'border-radius', '0'); 
             getIframe[elIndex].setAttribute('scrolling', 'yes');
             pElem.querySelector('.overlay').style.zIndex='1';
             document.querySelector('body').style.overflow = "hidden";
             root.style.setProperty('--scale', "100%");
+            document.getElementById('main-overlay').classList.toggle('main-overlay');
             addElements(pElem,elIndex);
             checkIfClicked = true;
-        }, 300);
+            // evtListeners('remove');
+            
+           // document.getElementById('toolbar').addEventListener('click', function(){console.log('test')})
+        // }, tTimeParsed);
         
 
  //document.querySelectorAll('.overlay')[pElem].style.zIndex='1';
@@ -74,10 +92,11 @@ let maximize = (pElem,elIndex) => {
     else{
         root.style.setProperty('--scale', "105%");
         document.querySelector('body').style.removeProperty('overflow');
+        document.getElementById('main-overlay').classList.toggle('main-overlay');
         checkIfClicked = false;
     }
 };
 
-
 getProjectClass.forEach(el =>  el.addEventListener('click', function(){let elIndex = indexInClass(getProjectClass, el) ;maximize(el,elIndex)}));
+
 

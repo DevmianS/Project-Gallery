@@ -2,7 +2,10 @@ main{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
     .finished,.wip{
+        width: 100%;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -10,6 +13,13 @@ main{
         background-color: rgb(44, 44, 44);
         border-radius: var(--bradius);
         margin: 20px;
+    }
+    .main-overlay{
+        background-color: rgba(0, 0, 0, 0.63);
+        position: absolute;
+        width: 150vw;
+        height: 300vh;
+        z-index: 5;
     }
     .project{
         
@@ -19,10 +29,12 @@ main{
         width: 400px;
         height: 800px;
         z-index: 1;
+        
         border-radius: 14px;
         overflow: hidden;
        // box-shadow: inset 0 0 50px #000000;
-        transition: all 0.4s ease-in-out;
+       
+        transition: all var(--transitiontime) ease-in-out;
 
         &:hover{
             transform: scale(var(--scale));
@@ -35,7 +47,7 @@ main{
             position: absolute;
             border-radius: var(--bradius);
             width: 100%;
-            height: 100%;
+            height: 100vh;
             perspective: 1000;
             
            // box-sizing: content-box; 
@@ -59,13 +71,14 @@ main{
             }
         }
         #toolbar{
+            pointer-events: none;
             position: absolute;
             display: flex;
             justify-content: center;
             align-items: center;
             width: 200px;
             height: 40px;
-            z-index: 10;
+            z-index: 999;
             top: -5px;
             left: 0;
             right: 0;
@@ -89,6 +102,7 @@ main{
                 opacity: 1;
             }
             #xbutton{
+                pointer-events: all;
                 width: 30%;
                 height: 60%;
                 transition: all 0.1s ease-in-out;

@@ -2,6 +2,7 @@
   --bradius: 15px;
   --bradius2: 16px;
   --scale: 105%;
+  --transitiontime:  0.6s;
 }
 
 body {
@@ -29,9 +30,12 @@ main {
           flex-direction: row;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
 }
 
 main .finished, main .wip {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -49,6 +53,14 @@ main .finished, main .wip {
   margin: 20px;
 }
 
+main .main-overlay {
+  background-color: rgba(0, 0, 0, 0.63);
+  position: absolute;
+  width: 150vw;
+  height: 300vh;
+  z-index: 5;
+}
+
 main .project {
   position: relative;
   margin: 20px;
@@ -58,8 +70,8 @@ main .project {
   z-index: 1;
   border-radius: 14px;
   overflow: hidden;
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
+  -webkit-transition: all var(--transitiontime) ease-in-out;
+  transition: all var(--transitiontime) ease-in-out;
 }
 
 main .project:hover {
@@ -74,7 +86,7 @@ main .project iframe {
   position: absolute;
   border-radius: var(--bradius);
   width: 100%;
-  height: 100%;
+  height: 100vh;
   -webkit-perspective: 1000;
           perspective: 1000;
 }
@@ -97,6 +109,7 @@ main .project .overlay:hover {
 }
 
 main .project #toolbar {
+  pointer-events: none;
   position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -109,7 +122,7 @@ main .project #toolbar {
           align-items: center;
   width: 200px;
   height: 40px;
-  z-index: 10;
+  z-index: 999;
   top: -5px;
   left: 0;
   right: 0;
@@ -141,6 +154,7 @@ main .project #toolbar:hover {
 }
 
 main .project #toolbar #xbutton {
+  pointer-events: all;
   width: 30%;
   height: 60%;
   -webkit-transition: all 0.1s ease-in-out;
