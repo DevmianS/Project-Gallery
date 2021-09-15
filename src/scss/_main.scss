@@ -4,6 +4,7 @@ main{
     flex-wrap: wrap;
     margin: 0;
     padding: 0;
+    overflow: hidden;
     .finished,.wip{
         width: 100%;
         display: flex;
