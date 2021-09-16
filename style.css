@@ -99,6 +99,7 @@ main .project:hover {
 @media (max-width: 900px) {
   main .project {
     width: 100%;
+    height: 100vh;
   }
 }
 
@@ -111,7 +112,7 @@ main .project iframe {
   -webkit-perspective: 1000;
           perspective: 1000;
   width: 250%;
-  height: 2000px;
+  height: 250%;
   -webkit-transform: scale(40%);
           transform: scale(40%);
   -webkit-transform-origin: 0 0;

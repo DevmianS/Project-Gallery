@@ -72,7 +72,7 @@ let maximize = (pElem,elIndex) => {
         
         // setTimeout(() => {//todo WIP
             setStyles(pElem, 'width', '90vw', 'height', '90vh','border-radius', '0'); 
-            setStyles(getIframe[elIndex], 'border-radius', '0'); 
+            setStyles(getIframe[elIndex], 'border-radius', '0', 'width', '100%', 'height', '100vh', 'transform', 'scale(100%)'); 
             getIframe[elIndex].setAttribute('scrolling', 'yes');
             pElem.querySelector('.overlay').style.zIndex='1';
             document.querySelector('body').style.overflow = "hidden";
@@ -92,6 +92,10 @@ let maximize = (pElem,elIndex) => {
         root.style.setProperty('--scale', "105%");
         document.querySelector('body').style.removeProperty('overflow');
         document.getElementById('main-overlay').classList.toggle('main-overlay');
+        setTimeout(() => {
+            remProps(getIframe[elIndex], 'border-radius', 'width', 'height', 'transform'); 
+            
+        }, tTimeParsed);
         checkIfClicked = false;
     }
 };
