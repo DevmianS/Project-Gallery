@@ -185,7 +185,7 @@ main .project #toolbar:hover {
   opacity: 1;
 }
 
-main .project #toolbar #xbutton {
+main .project #toolbar img {
   pointer-events: all;
   width: 30%;
   height: 60%;
@@ -194,7 +194,7 @@ main .project #toolbar #xbutton {
   cursor: pointer;
 }
 
-main .project #toolbar #xbutton:hover {
+main .project #toolbar img:hover {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
 }

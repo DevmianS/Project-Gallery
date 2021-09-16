@@ -42,6 +42,10 @@ function setStyles(el){//usage example: setStyles(el, 'width', '100px', 'height'
 //         getProjectClass.forEach(el =>  el.removeEventListener('click', function(){let elIndex = indexInClass(getProjectClass, el) ;maximize(el,elIndex)}));
 //     }
 // }
+function getLink(getIframe,elIndex){
+    let link = getIframe[elIndex].src;
+    window.open(link, '_blank').focus();
+}
 
 function hideToolbar(pElem,elIndex){
     getIframe[elIndex].setAttribute('scrolling', 'no');
@@ -53,17 +57,30 @@ function hideToolbar(pElem,elIndex){
     if (document.getElementById('toolbar'))
     document.getElementById('toolbar').remove();
 }
-
+function stopEvent(ev) {
+    // document.getElementById("c2");
+    // c2.innerHTML = "hello";
+  
+    // this ought to keep t-daddy from getting the click.
+    ev.stopPropagation();
+    alert("event propagation halted.");
+  }
 
 function addElements(pElem,elIndex){
     pElem.appendChild(addToolbar);
     addToolbar.setAttribute('id', 'toolbar');
     let getToolbar = document.getElementById('toolbar');
-    getToolbar.appendChild(document.createElement('img'));
-    getToolbar.querySelector('img').setAttribute('id','xbutton');
-    let toolbarXb = getToolbar.querySelector('#xbutton')
-    toolbarXb.src = "media/icon-close.svg";
-    toolbarXb.addEventListener('click',function(){hideToolbar(pElem,elIndex)});
+    if(!(getToolbar.querySelector('#xbutton'))){
+        getToolbar.appendChild(document.createElement('img')).setAttribute('id','xbutton');
+        getToolbar.appendChild(document.createElement('img')).setAttribute('id','visit');
+        let toolbarXb = getToolbar.querySelector('#xbutton');
+        let toolbarVb = getToolbar.querySelector('#visit');
+        toolbarXb.src = "media/icon-close.svg";
+        toolbarVb.src = "media/icon-visit.svg";
+        toolbarXb.addEventListener('click',function(){hideToolbar(pElem,elIndex)});
+        toolbarVb.addEventListener('click',function(){getLink(getIframe, elIndex)});
+        // toolbarVb.addEventListener('click',function(){getLink(getIframe, elIndex)});
+    }
 }
 
 function switchView(){
@@ -84,7 +101,7 @@ function switchView(){
 }
 
 let maximize = (pElem,elIndex) => {
-    
+    // if(pElem.classList.contains('project')){}
     if(checkIfClicked == false){
         setStyles(pElem, 'z-index', '999', 'position', 'fixed');
         
@@ -99,7 +116,7 @@ let maximize = (pElem,elIndex) => {
             addElements(pElem,elIndex);
             checkIfClicked = true;
             // evtListeners('remove');
-            
+   
            // document.getElementById('toolbar').addEventListener('click', function(){console.log('test')})
         // }, tTimeParsed);
         
@@ -118,6 +135,9 @@ let maximize = (pElem,elIndex) => {
     }
 };
 
-getProjectClass.forEach(el =>  el.addEventListener('click', function(){let elIndex = indexInClass(getProjectClass, el) ;maximize(el,elIndex)}));
+// getProjectClass.forEach((el,index) =>  getProjectClass[index].querySelectorAll('.overlay')[0].addEventListener('click', function(){console.log(el);maximize(getProjectClass[index],index)}));//todo fix event propagation
+getProjectClass.forEach((el,index) =>  el.addEventListener('click', function(){maximize(getProjectClass[index],index)}));//todo fix event propagation
+// getProjectClass.forEach((el,index) =>  getOverlay[index].addEventListener('click', function(){let elIndex = indexInClass(getProjectClass, el) ;maximize(el,elIndex)}));//todo fix event propagation
 switchBtn.addEventListener('click', switchView);
 
+//todo switch event listeners to ovelay?
