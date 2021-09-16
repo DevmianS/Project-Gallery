@@ -69,7 +69,7 @@ function addElements(pElem,elIndex){
 function switchView(){
     if (switchViewState==0){
         getIframe.forEach(el => {
-            setStyles(el, 'border-radius', '0', 'width', '100%', 'height', '100%', 'transform', 'scale(100%)'); 
+            setStyles(el, 'border-radius', '0', 'width', '100%', 'height', '100%', 'transform', 'scale(1)'); 
         });
         switchViewState=1;
     }
@@ -94,7 +94,7 @@ let maximize = (pElem,elIndex) => {
             getIframe[elIndex].setAttribute('scrolling', 'yes');
             pElem.querySelector('.overlay').style.zIndex='1';
             document.querySelector('body').style.overflow = "hidden";
-            root.style.setProperty('--scale', "100%");
+            root.style.setProperty('--scale', "1");
             document.getElementById('main-overlay').classList.toggle('main-overlay');
             addElements(pElem,elIndex);
             checkIfClicked = true;
@@ -107,7 +107,7 @@ let maximize = (pElem,elIndex) => {
  //document.querySelectorAll('.overlay')[pElem].style.zIndex='1';
     }
     else{
-        root.style.setProperty('--scale', "105%");
+        root.style.setProperty('--scale', "1.05");
         document.querySelector('body').style.removeProperty('overflow');
         document.getElementById('main-overlay').classList.toggle('main-overlay');
         setTimeout(() => {
