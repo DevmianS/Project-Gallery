@@ -55,6 +55,12 @@ main .finished, main .wip {
   margin: 20px;
 }
 
+@media (max-width: 700px) {
+  main .finished, main .wip {
+    margin: 0;
+  }
+}
+
 main .main-overlay {
   background-color: rgba(0, 0, 0, 0.63);
   position: absolute;
@@ -104,6 +110,12 @@ main .project iframe {
   height: 100vh;
   -webkit-perspective: 1000;
           perspective: 1000;
+  width: 250%;
+  height: 2000px;
+  -webkit-transform: scale(40%);
+          transform: scale(40%);
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
 }
 
 main .project .overlay {
