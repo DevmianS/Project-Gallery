@@ -48,7 +48,6 @@ function hideToolbar(pElem,elIndex){
     setTimeout(() => {
         remProps(pElem, 'z-index', 'position');
     }, tTimeParsed);
-    console.log(tTimeParsed)
     if (document.getElementById('toolbar'))
     document.getElementById('toolbar').remove();
 }

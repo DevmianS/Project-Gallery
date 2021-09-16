@@ -36,7 +36,7 @@ main {
 }
 
 main .finished, main .wip {
-  width: 100%;
+  width: 100vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -66,7 +66,7 @@ main .project {
   position: relative;
   margin: 20px;
   background-color: rgba(128, 128, 128, 0);
-  width: 400px;
+  width: 30%;
   height: 800px;
   z-index: 1;
   border-radius: 14px;
@@ -80,6 +80,18 @@ main .project:hover {
           transform: scale(var(--scale));
   -webkit-box-shadow: 0px 0px 70px 0px #000000;
           box-shadow: 0px 0px 70px 0px #000000;
+}
+
+@media (max-width: 1300px) {
+  main .project {
+    width: 45%;
+  }
+}
+
+@media (max-width: 1000px) {
+  main .project {
+    width: 100%;
+  }
 }
 
 main .project iframe {
@@ -166,4 +178,10 @@ main .project #toolbar #xbutton {
 main .project #toolbar #xbutton:hover {
   -webkit-transform: scale(110%);
           transform: scale(110%);
+}
+
+@media (max-width: 1000px) {
+  main {
+    width: 100%;
+  }
 }
