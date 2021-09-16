@@ -4,6 +4,8 @@ const getOverlay = document.querySelectorAll('.overlay');
 const getProjectClass = document.querySelectorAll('.project');
 const addToolbar = document.createElement('div')
 const root = document.documentElement;
+const switchBtn = document.querySelector('.mobileordesktop');
+let switchViewState = 0;
 // let getTransitionTime = 
 let tTimeParsed = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--transitiontime'),10)*1000;
 function setAttributes(el, attrs) {
@@ -64,6 +66,22 @@ function addElements(pElem,elIndex){
     toolbarXb.addEventListener('click',function(){hideToolbar(pElem,elIndex)});
 }
 
+function switchView(){
+    if (switchViewState==0){
+        getIframe.forEach(el => {
+            setStyles(el, 'border-radius', '0', 'width', '100%', 'height', '100%', 'transform', 'scale(100%)'); 
+        });
+        switchViewState=1;
+    }
+    else{
+        getIframe.forEach(el => {
+            remProps(el, 'border-radius', 'width', 'height', 'transform',);
+        });
+        switchViewState=0;
+    }
+
+    // setStyles(getIframe[elIndex], 'border-radius', '0', 'width', '100%', 'height', '100%', 'transform', 'scale(100%)'); 
+}
 
 let maximize = (pElem,elIndex) => {
     
@@ -93,7 +111,7 @@ let maximize = (pElem,elIndex) => {
         document.querySelector('body').style.removeProperty('overflow');
         document.getElementById('main-overlay').classList.toggle('main-overlay');
         setTimeout(() => {
-            remProps(getIframe[elIndex], 'border-radius', 'width', 'height', 'transform'); 
+            remProps(getIframe[elIndex], 'border-radius', 'width', 'height', 'transform'); //todo fix when switched to mobile
             
         }, tTimeParsed);
         checkIfClicked = false;
@@ -101,5 +119,5 @@ let maximize = (pElem,elIndex) => {
 };
 
 getProjectClass.forEach(el =>  el.addEventListener('click', function(){let elIndex = indexInClass(getProjectClass, el) ;maximize(el,elIndex)}));
-
+switchBtn.addEventListener('click', switchView);
 

@@ -36,6 +36,10 @@ main {
   width: 100%;
 }
 
+main .mobileordesktop {
+  position: fixed;
+}
+
 main .finished, main .wip {
   width: 100%;
   display: -webkit-box;

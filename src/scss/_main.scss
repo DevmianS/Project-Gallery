@@ -6,6 +6,9 @@ main{
     padding: 0;
     overflow: hidden;
     width: 100%;
+    .mobileordesktop{
+        position: fixed;
+    }
     .finished,.wip{
         width: 100%;
         display: flex;
@@ -73,6 +76,9 @@ main{
             width: 250%;
             height: 250%;
             transform: scale(0.4);
+            // width: 100%;
+            // height: 100%;
+            // transform: scale(1);
             transform-origin: 0 0;//todo view desktop
             // width: 800px; height: 520px; border: 1px solid black;
            // box-sizing: content-box; 
