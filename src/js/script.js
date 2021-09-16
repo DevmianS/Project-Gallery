@@ -90,7 +90,7 @@ let maximize = (pElem,elIndex) => {
         
         // setTimeout(() => {//todo WIP
             setStyles(pElem, 'width', '90vw', 'height', '90vh','border-radius', '0'); 
-            setStyles(getIframe[elIndex], 'border-radius', '0', 'width', '100%', 'height', '100vh', 'transform', 'scale(100%)'); 
+            setStyles(getIframe[elIndex], 'border-radius', '0', 'width', '100%', 'height', '100vh', 'transform', 'scale(1)'); 
             getIframe[elIndex].setAttribute('scrolling', 'yes');
             pElem.querySelector('.overlay').style.zIndex='1';
             document.querySelector('body').style.overflow = "hidden";
