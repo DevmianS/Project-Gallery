@@ -18,8 +18,9 @@ main{
     .main-overlay{
         background-color: rgba(0, 0, 0, 0.63);
         position: absolute;
-        width: 150vw;
-        height: 300vh;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
         z-index: 5;
     }
     .project{
@@ -49,7 +50,7 @@ main{
             width: 45%;
 
         }
-        @media (max-width: 1000px) {
+        @media (max-width: 900px) {
             width: 100%;
             
         }
