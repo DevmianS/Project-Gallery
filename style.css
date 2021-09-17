@@ -83,8 +83,8 @@ main .project {
   z-index: 1;
   border-radius: 14px;
   overflow: hidden;
-  -webkit-transition: all var(--transitiontime) ease-in-out;
-  transition: all var(--transitiontime) ease-in-out;
+  -webkit-transition: all var(--transitiontime) cubic-bezier(0.55, 0.06, 0.68, 0.19);
+  transition: all var(--transitiontime) cubic-bezier(0.55, 0.06, 0.68, 0.19);
 }
 
 main .project:hover {
@@ -146,9 +146,8 @@ main .project #toolbar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -187,8 +186,6 @@ main .project #toolbar:hover {
 
 main .project #toolbar img {
   pointer-events: all;
-  width: 30%;
-  height: 60%;
   -webkit-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
   cursor: pointer;

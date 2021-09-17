@@ -1,5 +1,5 @@
 const getIframe = document.querySelectorAll('iframe');
-let checkIfClicked = 0;
+let checkIfClicked = false;
 const getOverlay = document.querySelectorAll('.overlay');
 const getProjectClass = document.querySelectorAll('.project');
 const addToolbar = document.createElement('div')
@@ -44,7 +44,9 @@ function setStyles(el){//usage example: setStyles(el, 'width', '100px', 'height'
 // }
 function getLink(getIframe,elIndex){
     let link = getIframe[elIndex].src;
+    setStyles(getIframe[elIndex], 'border-radius', '0', 'width', '100%', 'height', '100vh', 'transform', 'scale(1)'); 
     window.open(link, '_blank').focus();
+    
 }
 
 function hideToolbar(pElem,elIndex){
@@ -73,14 +75,14 @@ function addElements(pElem,elIndex){
     if(!(getToolbar.querySelector('#xbutton'))){
         getToolbar.appendChild(document.createElement('img')).setAttribute('id','xbutton');
         getToolbar.appendChild(document.createElement('img')).setAttribute('id','visit');
-        let toolbarXb = getToolbar.querySelector('#xbutton');
-        let toolbarVb = getToolbar.querySelector('#visit');
-        toolbarXb.src = "media/icon-close.svg";
-        toolbarVb.src = "media/icon-visit.svg";
-        toolbarXb.addEventListener('click',function(){hideToolbar(pElem,elIndex)});
-        toolbarVb.addEventListener('click',function(){getLink(getIframe, elIndex)});
-        // toolbarVb.addEventListener('click',function(){getLink(getIframe, elIndex)});
     }
+    let toolbarXb = getToolbar.querySelector('#xbutton');
+    let toolbarVb = getToolbar.querySelector('#visit');
+    toolbarXb.src = "media/icon-close.svg";
+    toolbarVb.src = "media/icon-visit.svg";
+    toolbarXb.addEventListener('click',function(){hideToolbar(pElem,elIndex)});
+    toolbarVb.addEventListener('click',function(){getLink(getIframe, elIndex)});
+    // toolbarVb.addEventListener('click',function(){getLink(getIframe, elIndex)});
 }
 
 function switchView(){
@@ -134,10 +136,12 @@ let maximize = (pElem,elIndex) => {
         checkIfClicked = false;
     }
 };
-
 // getProjectClass.forEach((el,index) =>  getProjectClass[index].querySelectorAll('.overlay')[0].addEventListener('click', function(){console.log(el);maximize(getProjectClass[index],index)}));//todo fix event propagation
 getProjectClass.forEach((el,index) =>  el.addEventListener('click', function(){maximize(getProjectClass[index],index)}));//todo fix event propagation
 // getProjectClass.forEach((el,index) =>  getOverlay[index].addEventListener('click', function(){let elIndex = indexInClass(getProjectClass, el) ;maximize(el,elIndex)}));//todo fix event propagation
+// getProjectClass.forEach(el =>  el.addEventListener('click', function(){let elIndex = indexInClass(getProjectClass, el) ;maximize(el,elIndex)}));
+// getOverlay.forEach((el, index) => el.addEventListener('click', function(){maximize(getProjectClass[index],index)}));
 switchBtn.addEventListener('click', switchView);
+// getProjectClass.forEach((el,index) =>  el.removeEventListener('click', function tst(){maximize(getProjectClass[index],index)}));//todo fix event propagation
 
-//todo switch event listeners to ovelay?
+

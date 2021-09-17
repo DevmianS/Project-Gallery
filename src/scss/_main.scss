@@ -38,12 +38,12 @@ main{
         width: 30%;
         height: 800px;
         z-index: 1;
-        
+        // flex: 1;
         border-radius: 14px;
         overflow: hidden;
        // box-shadow: inset 0 0 50px #000000;
        
-        transition: all var(--transitiontime) ease-in-out;
+        transition: all var(--transitiontime) cubic-bezier(.55,.06,.68,.19);
        // width: 600px; height: 390px; padding: 0; overflow: hidden;
         &:hover{
             transform: scale(var(--scale));
@@ -111,7 +111,7 @@ main{
             pointer-events: none;
             position: absolute;
             display: flex;
-            justify-content: center;
+            justify-content: space-around;
             align-items: center;
             width: 200px;
             height: 40px;
@@ -140,8 +140,8 @@ main{
             }
             img{
                 pointer-events: all;
-                width: 30%;
-                height: 60%;
+                // width: 100%;
+                // height: 60%;
                 transition: all 0.1s ease-in-out;
                 cursor: pointer;
                 &:hover{
